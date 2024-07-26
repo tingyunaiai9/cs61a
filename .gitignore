@@ -1,5 +1,7 @@
 # other
 *.wav
+.ok_consent
+.ok_disabled
 .ok_history
 .ok_messages
 .ok_storage.bak
