@@ -169,6 +169,8 @@ class ThrowerAnt(Ant):
     damage = 1
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 3
+    lower_bound = 0
+    upper_bound = float('inf')
 
     def nearest_bee(self):
         """Return the nearest Bee in a Place (that is not the hive) connected to
@@ -177,16 +179,24 @@ class ThrowerAnt(Ant):
         This method returns None if there is no such Bee (or none in range).
         """
         # BEGIN Problem 3 and 4
-        # return random_bee(self.place.bees) # REPLACE THIS LINE
 
-        if self.place.is_hive is False and self.place.bees != []:
+        distance = 0 # count the entrance transitions
+
+        if (self.place.is_hive is False and
+            self.place.bees != [] and
+            self.lower_bound <= distance <= self.upper_bound ):
             return random_bee(self.place.bees)
         else:
             cur_place = self.place
             while cur_place.entrance is not None:
                 cur_place = cur_place.entrance
-                if cur_place.is_hive is False and cur_place.bees != []:
+                distance += 1
+                if (cur_place.is_hive is False and
+                    cur_place.bees != [] and
+                    self.lower_bound <= distance <= self.upper_bound):
                     return random_bee(cur_place.bees)
+                elif distance > self.upper_bound:
+                    return None
             return None
 
         # END Problem 3 and 4
@@ -219,8 +229,9 @@ class ShortThrower(ThrowerAnt):
     name = 'Short'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    upper_bound = 3
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
@@ -230,8 +241,9 @@ class LongThrower(ThrowerAnt):
     name = 'Long'
     food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
+    lower_bound = 5
     # BEGIN Problem 4
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 4
 
 
