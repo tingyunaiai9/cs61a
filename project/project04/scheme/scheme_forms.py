@@ -247,7 +247,6 @@ def make_let_frame(bindings, env):
     return env.make_child_frame(names, vals)
 
 
-
 def do_quasiquote_form(expressions, env):
     """Evaluate a quasiquote form with parameters EXPRESSIONS in
     Frame ENV."""
