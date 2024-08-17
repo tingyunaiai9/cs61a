@@ -7,8 +7,16 @@
 ;; Returns a list of two-element lists
 (define (enumerate s)
   ; BEGIN PROBLEM 15
-  'replace-this-line
+  (begin
+    (define (enumerate-helper sub_s n)
+      (if (null? sub_s)
+          '()
+          (cons (list n (car sub_s))
+                (enumerate-helper (cdr sub_s) (+ n 1))))
+      )
+    (enumerate-helper s 0)
   )
+)
   ; END PROBLEM 15
 
 ;; Problem 16
